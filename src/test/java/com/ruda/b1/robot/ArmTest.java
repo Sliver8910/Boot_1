@@ -10,13 +10,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.ruda.head.Header;
 @SpringBootTest
 class ArmTest {
-	@Autowired
-	private Header header;
-
-
-	@Test
-	void test() {
-		assertNotNull(header);
-	}
-
+	
 }

@@ -12,23 +12,6 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 @SpringBootTest
 class memberTest {
 	
-	@Autowired
-	private MemberMapper membermapper;
 	
-
-	@Test
-	void test() throws Exception{
-		MemberVO memberVO = new MemberVO();
-		memberVO.setId("iu2");
-		memberVO.setEmail("iu2@iu.com");
-		memberVO.setName("iu2");
-		memberVO.setPw("iu2");
-		int result = membermapper.memberJoin(memberVO);
-		
-		
-		assertEquals(1, result);
-		
 		
 	}
-
-}
