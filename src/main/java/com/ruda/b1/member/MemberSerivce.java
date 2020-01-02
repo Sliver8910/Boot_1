@@ -6,6 +6,7 @@ import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ruda.b1.util.FilePathGenerator;
@@ -23,6 +24,7 @@ public class MemberSerivce {
 		@Autowired MemberFilesMapper memberFilesMapper;
 		
 		
+		@Transactional
 		public int memberJoin(MemberVO memberVO, MultipartFile files)throws Exception{
 			//파일을 저장할 폴더
 			File file = filePathGenerator.getUseClasspathResource("upload");
