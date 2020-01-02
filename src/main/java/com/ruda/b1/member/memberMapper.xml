@@ -7,5 +7,10 @@
 		insert into members values(#{id}, #{pw}, #{name}, #{email}
 		)
 	</insert>
+	
+	<select id="memberLogin" parameterType="com.ruda.b1.member.MemberVO" resultType="com.ruda.b1.member.MemberVO">
+		select * from members where id = #{id} and pw = #{pw}
+	</select>
+	
 
 </mapper>

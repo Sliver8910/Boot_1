@@ -20,6 +20,7 @@ public class MemberSerivce {
 		private FilePathGenerator filePathGenerator;
 		@Autowired
 		private FileSaver fileSaver;
+		@Autowired MemberFilesMapper memberFilesMapper;
 		
 		
 		public int memberJoin(MemberVO memberVO, MultipartFile files)throws Exception{
@@ -28,7 +29,32 @@ public class MemberSerivce {
 			
 			String fileName = fileSaver.save(file, files);
 			System.out.println(fileName);
-			return 0;//memberMapper.memberJoin(memberVO);
 			
+			int result = memberMapper.memberJoin(memberVO);
+			
+			MemberFilesVO memberFilesVO = new MemberFilesVO();
+			memberFilesVO.setId(memberVO.getId());
+			memberFilesVO.setFname(fileName);
+			memberFilesVO.setOname(files.getOriginalFilename());
+			
+			result = memberFilesMapper.memberFilesInsert(memberFilesVO);
+			
+			
+			return result;
+			
+		}
+		
+		//member Login
+		public MemberVO memberLogin(MemberVO memberVO)throws Exception{
+			return memberMapper.memberLogin(memberVO);
+		}
+		
+		//memberPage
+		public MemberFilesVO memberFilesSelect(MemberFilesVO memberFilesVO)throws Exception{
+			return memberFilesMapper.memberFilesSelect(memberFilesVO);
+		}
+		
+		public MemberFilesVO memberFilesSelect2(MemberFilesVO memberFilesVO)throws Exception{
+			return memberFilesMapper.memberFilesSelect2(memberFilesVO);
 		}
 }
