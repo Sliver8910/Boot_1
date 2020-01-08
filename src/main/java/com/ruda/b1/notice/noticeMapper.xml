@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruda.b1.notice.NoticeMapper">
+	<insert id="noticeWrite" parameterType="com.ruda.b1.notice.NoticeVO" useGeneratedKeys="true" keyProperty="num">
+		insert into notice values(#{num}, #{title}, #{writer}, #{contents}, sysdate() ,0)
+	</insert>
+	
+	<!-- 10개씩 가지고오는 SELECT -->
+	
+	<sql id="bs">
+	<choose>
+			<when test="kind == 'kt'">
+				where title like '%'||#{search}||'%' and num>0
+			</when>
+			<when test="kind == 'kw'">
+				where writer like '%'||#{search}||'%' and num>0
+			</when>
+			<when test="kind == 'kc'">
+				where contents like '%'||#{search}||'%' and num>0
+			</when>
+		</choose>
+	</sql>
+	<select id="noticeList" resultType="com.ruda.b1.notice.NoticeVO" parameterType="com.ruda.b1.util.Pager">
+		select * from notice 
+		<include refid="bs"></include>
+		 order by num desc limit #{startRow}, #{perPage};
+	</select>
+	
+	<select id="noticeCount" resultType="java.lang.Integer" parameterType="com.ruda.b1.util.Pager">
+		select count(num) from notice
+		<include refid="bs"></include>
+	</select>
+	
+	<!-- selectone -->
+	<select id="noticeSelect" resultType="com.ruda.b1.notice.NoticeVO" parameterType="com.ruda.b1.notice.NoticeVO">
+		select * from notice where num = #{num}
+	</select>
+	
+	
+
+</mapper>

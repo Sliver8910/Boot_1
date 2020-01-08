@@ -41,6 +41,9 @@ public class MemberSerivce {
 			
 			result = memberFilesMapper.memberFilesInsert(memberFilesVO);
 			
+			//memberVO = memberMapper.memberIdCheck(memberVO);
+			
+			//if(memberVO != null ) {}
 			
 			return result;
 			
@@ -59,4 +62,6 @@ public class MemberSerivce {
 		public MemberFilesVO memberFilesSelect2(MemberFilesVO memberFilesVO)throws Exception{
 			return memberFilesMapper.memberFilesSelect2(memberFilesVO);
 		}
+		
+		
 }

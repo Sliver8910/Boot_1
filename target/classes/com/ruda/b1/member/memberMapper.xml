@@ -12,5 +12,8 @@
 		select * from members where id = #{id} and pw = #{pw}
 	</select>
 	
+	<select id="memberIdCheck" parameterType="com.ruda.b1.member.MemberVO" resultType="com.ruda.b1.member.MemberVO">
+		select * from members where id = #{id}
+	</select>
 
 </mapper>
